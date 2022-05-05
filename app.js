@@ -1,10 +1,29 @@
 const express = require("express");
+require('dotenv').config();
+require('./database/mongoose')
+
+// models
+const User = require('./models/user');
+
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('<h1>This is our first server</h1>')
+// use middlewares
+app.use(express.json());
+
+const PORT = process.env.PORT || 8002;
+const user = new User({
+  firstname: 'Jorge',
+  lastname: 'Mollericon',
+  email: 'jlmollericon@gmail.com',
+  password: '1234',
+  rol: 'admin'
 });
 
-app.listen(8002, () => {
-  console.log('Listen on port: 8002');
+user.save((err, user) => {
+  if (err) return console.log(err);
+  console.log(user)
+})
+
+app.listen(PORT, () => {
+  console.log('Listen on port:', PORT);
 });

@@ -5,7 +5,6 @@ module.exports = mongoose.connect(
   {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useCreateIndex: true
   },
   () => {
     console.log('Database is connected');
