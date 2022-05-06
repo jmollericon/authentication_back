@@ -21,7 +21,7 @@ exports.signupUser = async (req, res) => {
     const { firstname, lastname, email, role } = newUser;
     await newUser.save();
 
-    const token = signToken(user._id);
+    const token = signToken(newUser._id);
     res.cookie('auth_token', token, {
       httpOnly: true
     });
