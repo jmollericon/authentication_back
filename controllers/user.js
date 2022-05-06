@@ -17,3 +17,20 @@ exports.signupUser = async (req, res) => {
 
   res.status(201).json({ success: true, user: { firstname, lastname, email, role } });
 }
+
+exports.signinUser = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(401).json({ success: false, error: 'User not found, try sign up!' });
+  }
+
+  const isMatch = await user.comparePassword(password);
+  if (!isMatch) {
+    return res.status(401).json({ success: false, error: 'Email / Password do not match.' });
+  }
+
+  const { firstname, lastname, role } = user;
+  res.json({ success: true, user: { firstname, lastname, email, role } })
+}
