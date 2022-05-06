@@ -66,3 +66,9 @@ exports.signinUser = async (req, res) => {
       .json({ success: false, error: 'Some error occor!' });
   }
 }
+
+exports.signOut = (req, res) => {
+  res
+    .clearCookie('auth_token')
+    .json({ success: true });
+}
