@@ -28,7 +28,7 @@ exports.signupUser = async (req, res) => {
 
     res
       .status(201)
-      .json({ success: true, user: { firstname, lastname, email, role } });
+      .json({ success: true, user: { firstname, lastname, email, role }, token });
   } catch (error) {
     res
       .status(500)
@@ -59,7 +59,7 @@ exports.signinUser = async (req, res) => {
     const { firstname, lastname, role } = user;
     res
       .status(200)
-      .json({ success: true, user: { firstname, lastname, email, role } })
+      .json({ success: true, user: { firstname, lastname, email, role }, token })
   } catch (error) {
     res
       .status(500)
